@@ -33,13 +33,11 @@ def recvall(sock, n):
 
 
 
-host = input("DISPLAYER HOST: \n")
-
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s2:
-        s2.connect((host, 85))
+        s2.connect(("192.168.0.150", 4000))
         
-        s.bind((socket.gethostname(), 82))
+        s.bind(("192.168.0.94", 5000))
         s.listen()
         conn, addr = s.accept()
         with conn:
@@ -55,5 +53,4 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 
                 img_str = cv2.imencode('.jpg', imagem)[1].tostring()
                 send_msg(s2, img_str)
-cv2.destroyAllWindows()         
 
