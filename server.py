@@ -33,10 +33,11 @@ def recvall(sock, n):
 
 
 
+host = input("DISPLAYER HOST: \n")
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s2:
-        s2.connect((socket.gethostname(), 85))
+        s2.connect((host, 85))
         
         s.bind((socket.gethostname(), 82))
         s.listen()

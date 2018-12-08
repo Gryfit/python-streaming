@@ -31,10 +31,10 @@ def recvall(sock, n):
         data += packet
     return data
 
-def streamCamera():
+def streamCamera(host):
     cap = cv2.VideoCapture('Fantastic.Beasts.and.Where.to.Find.Them.mp4')
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.connect((socket.gethostname(), 82))
+        s.connect((host, 82))
         while(cap.isOpened()):
             ret, frame = cap.read()
             img_str = cv2.imencode('.jpg', frame)[1].tostring()
@@ -60,9 +60,9 @@ def displayer():
 disp = Process(target=displayer, args=())
 disp.start()
 
-x = input("DONE?")
+host = input("CLUSTER HOST: \n")
 
-cam = Process(target=streamCamera, args=())
+cam = Process(target=streamCamera, args=(host,))
 cam.start()
 
 
